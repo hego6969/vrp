@@ -25,6 +25,8 @@ function vRP.updateVehicleConfi(vehicle,plate,confiscaded)
   print('DETTE ER IKKE SAT OP')
 end
 
+
+
 RegisterServerEvent('police:freeVehicle')
 AddEventHandler('police:freeVehicle', function(vehicle,plate)
 	vRP.updateVehicleConfi(vehicle,plate,0)
@@ -48,6 +50,7 @@ function vRP.license(user_id)
     vRP.setLicense(user_id,2) --1 = Frataget
   end
 end
+
 
 -- police PC
 
@@ -893,94 +896,108 @@ local choice_handcuff = {function(player,choice)
 end,lang.police.menu.handcuff.description()}
 
 -- add choices to the menu
+local oxPoliceActions = {}
+local oxEmsActions = {}
+
+RegisterNetEvent("vrp:oxPoliceMenuSelect")
+AddEventHandler("vrp:oxPoliceMenuSelect", function(data)
+  local player = source
+  local action = data and data.action
+
+  if oxPoliceActions[action] then
+    oxPoliceActions[action][1](player, action)
+  end
+end)
+
+RegisterNetEvent("vrp:oxEmsMenuSelect")
+AddEventHandler("vrp:oxEmsMenuSelect", function(data)
+  local player = source
+  local action = data and data.action
+
+  if oxEmsActions[action] then
+    oxEmsActions[action][1](player, action)
+  end
+end)
+
 vRP.registerMenuBuilder("main", function(add, data)
   local player = data.player
-
   local user_id = vRP.getUserId(player)
+
   if user_id ~= nil then
     local choices = {}
 
-    if vRP.hasPermission(user_id,"police.menu") then
-		choices[lang.police.title()] = {function(player,choice)
-			vRP.buildMenu("police", {player = player}, function(menu)
-				menu.name = lang.police.title()
-				menu.css = {top="75px",header_color="rgba(0,33,62,0.75)"}
+    if vRP.hasPermission(user_id, "police.menu") then
+      choices[lang.police.title()] = {function(player, choice)
+        local options = {}
+        oxPoliceActions = {}
 
-				if vRP.hasPermission(user_id,"police.pc") then
-					menu[lang.police.menu.handcuff.title()] = choice_handcuff
-				end
-				if vRP.hasPermission(user_id,"police.putinveh") then
-					menu[lang.police.menu.putinveh.title()] = choice_putinveh
-				end
-				if vRP.hasPermission(user_id,"police.getoutveh") then
-					menu[lang.police.menu.getoutveh.title()] = choice_getoutveh
-				end
-				if vRP.hasPermission(user_id,"police.check") then
-					menu[lang.police.menu.check.title()] = choice_check
-				end
-				if vRP.hasPermission(user_id,"police.seize.weapons") then
-					menu[lang.police.menu.seize.weapons.title()] = choice_seize_weapons
-				end
-				if vRP.hasPermission(user_id,"police.drag") then
-					menu[lang.police.menu.dragplayer.title()] = choice_dragplayer
-				end
-				if vRP.hasPermission(user_id,"police.seize.items") then
-					menu[lang.police.menu.seize.items.title()] = choice_seize_items
-				end
-				if vRP.hasPermission(user_id,"police.license") then
-					menu[lang.police.menu.license.title()] = choice_license
-				end
-				if vRP.hasPermission(user_id,"police.carsearch") then
-					menu[lang.police.menu.searchcar.title()] = choice_carsearch
-				end
-				if vRP.hasPermission(user_id,"police.cprsearch") then
-					menu[lang.police.menu.cprsearch.title()] = choice_cprsearch
-				end
-				if vRP.hasPermission(user_id,"police.pc") then
-					menu["Beslaglæg Køretøj"] = ch_confiscade_vehicle
-				end
-				if vRP.hasPermission(user_id,"police.seize.vehicles") then
-					menu["Frigiv Køretøj"] = ch_free_vehicle
-				end
-				vRP.openMenu(player,menu)
-			end)
-		end}
+        local function addOption(permission, title, choiceData, icon)
+          if vRP.hasPermission(user_id, permission) then
+            oxPoliceActions[title] = choiceData
+
+            options[#options + 1] = {
+              title = title,
+              description = choiceData[2],
+              action = title,
+              icon = icon
+            }
+          end
+        end
+
+        addOption("police.pc", lang.police.menu.handcuff.title(), choice_handcuff, "handcuffs")  -- choice_fine
+        addOption("police.putinveh", lang.police.menu.putinveh.title(), choice_putinveh, "car")
+        addOption("police.getoutveh", lang.police.menu.getoutveh.title(), choice_getoutveh, "car-side")
+        addOption("police.check", lang.police.menu.check.title(), choice_check, "magnifying-glass")
+        addOption("police.seize.weapons", lang.police.menu.seize.weapons.title(), choice_seize_weapons, "gun")
+        addOption("police.drag", lang.police.menu.dragplayer.title(), choice_dragplayer, "person-walking")
+        addOption("police.seize.items", lang.police.menu.seize.items.title(), choice_seize_items, "box")
+        addOption("police.license", lang.police.menu.license.title(), choice_license, "id-card")
+        addOption("police.carsearch", lang.police.menu.searchcar.title(), choice_carsearch, "car")
+        addOption("police.cprsearch", lang.police.menu.cprsearch.title(), choice_cprsearch, "address-card")
+        addOption("police.pc", "Beslaglæg Køretøj", ch_confiscade_vehicle, "truck-ramp-box")
+        addOption("police.seize.vehicles", "Frigiv Køretøj", ch_free_vehicle, "unlock")
+        addOption("police.pc", "Bøde", choice_fine, "ticket")
+
+        TriggerClientEvent("vrp:openOxPoliceMenu", player, lang.police.title(), options)
+      end}
     end
 
-    if vRP.hasPermission(user_id,"emergency.menu") then
-		choices[lang.emergency.title()] = {function(player,choice)
-			vRP.buildMenu("ems", {player = player}, function(menu)
-				menu.name = lang.emergency.title()
-				menu.css = {top="75px",header_color="rgba(1,92,83,0.75)"}
-				  
-				if vRP.hasPermission(user_id,"emergency.putinveh") then
-					menu[lang.police.menu.putinveh.title()] = choice_putinveh_ems
-				end
-				if vRP.hasPermission(user_id,"emergency.getoutveh") then
-					menu[lang.police.menu.getoutveh.title()] = choice_getoutveh_ems
-				end
-				if vRP.hasPermission(user_id,"emergency.drag") then
-					menu[lang.police.menu.dragplayer.title()] = choice_dragplayer_ems
-				end
-				if vRP.hasPermission(user_id,"emergency.revive") then
-					menu[lang.emergency.menu.revive.title()] = choice_revive
-				end
-				if vRP.hasPermission(user_id,"emergency.heal") then
-					menu[lang.emergency.menu.heal.title()] = choice_heal
-				end
-				vRP.openMenu(player,menu)
-			end)
-		end}
+    if vRP.hasPermission(user_id, "emergency.menu") then
+      choices[lang.emergency.title()] = {function(player, choice)
+        local options = {}
+        oxEmsActions = {}
+
+        local function addOption(permission, title, choiceData, icon)
+          if vRP.hasPermission(user_id, permission) then
+            oxEmsActions[title] = choiceData
+
+            options[#options + 1] = {
+              title = title,
+              description = choiceData[2],
+              action = title,
+              icon = icon
+            }
+          end
+        end
+
+        addOption("emergency.putinveh", lang.police.menu.putinveh.title(), choice_putinveh_ems, "car")
+        addOption("emergency.getoutveh", lang.police.menu.getoutveh.title(), choice_getoutveh_ems, "car-side")
+        addOption("emergency.drag", lang.police.menu.dragplayer.title(), choice_dragplayer_ems, "person-walking")
+        addOption("emergency.revive", lang.emergency.menu.revive.title(), choice_revive, "heart-pulse")
+        addOption("emergency.heal", lang.emergency.menu.heal.title(), choice_heal, "kit-medical")
+
+        TriggerClientEvent("vrp:openOxEmsMenu", player, lang.emergency.title(), options)
+      end}
     end
-	
-    if vRP.hasPermission(user_id,"user.askid") then
+
+    if vRP.hasPermission(user_id, "user.askid") then
       choices[lang.police.menu.askid.title()] = choice_askid
     end
 
     if vRP.hasPermission(user_id, "police.store_weapons") then
       choices[lang.police.menu.store_weapons.title()] = choice_store_weapons
     end
-	
+
     if vRP.hasPermission(user_id, "user.askid") then
       choices[lang.police.menu.check.title()] = choice_user_check
     end

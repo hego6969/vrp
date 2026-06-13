@@ -590,10 +590,10 @@ AddEventHandler("vRP:multicharacterLogin", function(player, character_identifier
       return
     end
 
-    if vRP.user_sources[user_id] ~= nil and vRP.user_sources[user_id] ~= player then
-      if cbr then cbr(false, "Karakteren er allerede online.") end
-      return
-    end
+    --if vRP.user_sources[user_id] ~= nil and vRP.user_sources[user_id] ~= player then
+     -- if cbr then cbr(false, "Karakteren er allerede online.") end -- for at teste på localhost
+      --return
+    --end
 
     vRP.getUserData(user_id, function(userdata)
       if not userdata then
@@ -659,12 +659,12 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
       return
     end
 
-    if isMulticharacterStarted() and primary_identifier ~= nil and multicharacter_active_identifiers[primary_identifier] ~= nil and multicharacter_active_identifiers[primary_identifier] ~= source then
-      print("["..name.."] Forsogte at joine med en identifier der allerede er online")
-      deferrals.done("[FlaxHosting] Du er allerede tilsluttet serveren.")
-      Debug.pend()
-      return
-    end
+    --if isMulticharacterStarted() and primary_identifier ~= nil and multicharacter_active_identifiers[primary_identifier] ~= nil and multicharacter_active_identifiers[primary_identifier] ~= source then
+    -- print("["..name.."] Forsogte at joine med en identifier der allerede er online")
+    --  deferrals.done("[FlaxHosting] Du er allerede tilsluttet serveren.") -- for at teste på localhost
+    --  Debug.pend()
+    --  return
+    --end
 
     if isMulticharacterStarted() then
       deferrals.update("[FlaxHosting] IndlÃ¦ser karaktervalg.")

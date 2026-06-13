@@ -360,6 +360,7 @@ cfg.groups = {
 		},
 	"cop.whitelisted",
 	"ems.doors",
+	"police.service",
 	"police.weapons"
 },
 ["DBE Chef"] = {

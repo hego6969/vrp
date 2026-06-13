@@ -10,8 +10,7 @@ function tvRP.setCop(flag)
   SetPedAsCop(GetPlayerPed(-1),flag)
 end
 
--- HANDCUFF
-
+-- HANDCUFFS
 
 function tvRP.toggleHandcuff()
   handcuffed = not handcuffed
