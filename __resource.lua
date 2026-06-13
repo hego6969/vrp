@@ -6,6 +6,8 @@ ui_page "gui/index.html"
 
 shared_script{'cfg/webhooks.lua'}
 
+
+
 server_scripts{ 
   "@oxmysql/lib/MySQL.lua",
   "lib/utils.lua",
@@ -60,8 +62,11 @@ client_scripts{
   "client/admin.lua",
   "client/ox_police_menu.lua",
   "client/ox_prompt.lua",
+  "client/ox_player_target.lua",
   --"client/anticheat.lua",
 }
+
+shared_script "@ox_lib/init.lua"
 
 files{
   "cfg/client.lua",

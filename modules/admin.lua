@@ -1029,28 +1029,6 @@ function sendToDiscord2(discord, name, message)
     PerformHttpRequest(discord, function(err, text, headers) end, 'POST', json.encode({username = name,content = message}), { ['Content-Type'] = 'application/json' })
 end
 
-RegisterCommand('unbanalle', function(source)
-    local user_id = vRP.getUserId(source)
-    if user_id == 1 or user_id == 278 then
-        vRP.prompt(source,"Indtast antal ids du vil unbanne: ","",function(source,antal)
-            vRP.prompt(source,"Vil du unbanne alle "..antal.." ids? ja/nej: ","",function(source,svar)
-                if string.lower(svar) == "ja" then
-                    for i = 1,antal do
-                        Wait(2)
-                        vRP.setBanned(i,false)
-                        print(i.." blev unbannet")
-                    end
-                    vRPclient.notify(source,{"ALLE "..antal.." IDS ER NU UNBANNET."})
-                    print("ALLE "..antal.." IDS ER NU UNBANNET.")
-                    local dmessage = "```".. tostring(user_id).. " unbannede alle```"
-                    PerformHttpRequest(webhook.UnbanAlle, function(err, text, headers) end, 'POST', json.encode({username = dname, content = dmessage}), { ['Content-Type'] = 'application/json' })
-                end
-            end)
-        end)
-    else
-        vRPclient.notify(source,{"DU HAR IKKE ADGANG"})
-    end
-end)
 
 RegisterCommand('revivealle', function(source)
     local user_id = vRP.getUserId(source)

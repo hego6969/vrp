@@ -895,6 +895,45 @@ local choice_handcuff = {function(player,choice)
   end)
 end,lang.police.menu.handcuff.description()}
 
+RegisterNetEvent("vrp:targetPoliceAction")
+AddEventHandler("vrp:targetPoliceAction", function(action)
+  local player = source
+  local user_id = vRP.getUserId(player)
+
+  if user_id == nil then return end
+
+  if action == "search" and vRP.hasPermission(user_id, "police.check") then
+    choice_check[1](player, action)
+  elseif action == "handcuff" and vRP.hasPermission(user_id, "police.pc") then
+    choice_handcuff[1](player, action)
+  elseif action == "putinveh" and vRP.hasPermission(user_id, "police.putinveh") then
+    choice_putinveh[1](player, action)
+  elseif action == "getoutveh" and vRP.hasPermission(user_id, "police.getoutveh") then
+    choice_getoutveh[1](player, action)
+  elseif action == "cpr" and vRP.hasPermission(user_id, "police.cprsearch") then
+    choice_cprsearch[1](player, action)
+  elseif action == "fine" and vRP.hasPermission(user_id, "police.pc") then
+    choice_fine[1](player, action)
+  end
+end)
+
+RegisterNetEvent("vrp:targetEmsAction")
+AddEventHandler("vrp:targetEmsAction", function(action)
+  local player = source
+  local user_id = vRP.getUserId(player)
+
+  if user_id == nil then return end
+
+  if action == "revive" and vRP.hasPermission(user_id, "emergency.revive") then
+    choice_revive[1](player, action)
+  elseif action == "heal" and vRP.hasPermission(user_id, "emergency.heal") then
+    choice_heal[1](player, action)
+  elseif action == "drag" and vRP.hasPermission(user_id, "emergency.drag") then
+    choice_dragplayer_ems[1](player, action)
+  end
+end)
+
+
 -- add choices to the menu
 local oxPoliceActions = {}
 local oxEmsActions = {}
@@ -1146,23 +1185,24 @@ RegisterServerEvent('handcuff:cuffHim', function()
 end)
 
 
-RegisterCommand("håndjern", function(source) 
-	      local user_id = vRP.getUserId({source})
-  
-        if vRP.hasPermission(user_id, "police.handcuff") then
-	      vRPclient.getNearestPlayer(source,{1.5},function(cplayer)
-	  	  if cplayer ~= nil then
-	  	  		local nuser_id = vRP.getUserId(cplayer)
-            vRPclient.toggleHandcuff(cplayer,{})
-        vRPclient.isHandcuffed(cplayer,{}, function(handcuffed)
-          if handcuffed then
-					  TriggerClientEvent("pNotify:SendNotification", source,{text = {"Personen blev sat i håndjern."}, type = "info", queue = "global", timeout = 3000, layout = "centerRight",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
-				  else
-					  TriggerClientEvent("pNotify:SendNotification", source,{text = {"Personen fik løsnet sine håndjern."}, type = "info", queue = "global", timeout = 3000, layout = "centerRight",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
-          end
-        end)
-       end
-      end)
-    end
-end)
 
+
+lib.callback.register("vrp:targetPermissions", function(source)
+  local user_id = vRP.getUserId(source)
+  if not user_id then return {} end
+
+  return {
+    police = vRP.hasPermission(user_id, "police.menu"),
+    policeSearch = vRP.hasPermission(user_id, "police.check"),
+    policeHandcuff = vRP.hasPermission(user_id, "police.pc"),
+    policePutInVeh = vRP.hasPermission(user_id, "police.putinveh"),
+    policeGetOutVeh = vRP.hasPermission(user_id, "police.getoutveh"),
+    policeCpr = vRP.hasPermission(user_id, "police.cprsearch"),
+    policeFine = vRP.hasPermission(user_id, "police.pc"),
+
+    ems = vRP.hasPermission(user_id, "emergency.menu"),
+    emsRevive = vRP.hasPermission(user_id, "emergency.revive"),
+    emsHeal = vRP.hasPermission(user_id, "emergency.heal"),
+    emsDrag = vRP.hasPermission(user_id, "emergency.drag")
+  }
+end)
