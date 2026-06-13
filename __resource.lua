@@ -37,9 +37,11 @@ server_scripts{
   "modules/cloakroom.lua",
   --"modules/anticheat.lua",
   "modules/ox_inventory_compat.lua",
+   "modules/ox_prompt.lua",
 }
 
 client_scripts{
+  "@ox_lib/init.lua",
   "lib/utils.lua",
   "client/Tunnel.lua",
   "client/Proxy.lua",
@@ -56,6 +58,8 @@ client_scripts{
   "client/drag.lua",
   "client/adminvehicle.lua",
   "client/admin.lua",
+  "client/ox_police_menu.lua",
+  "client/ox_prompt.lua",
   --"client/anticheat.lua",
 }
 
