@@ -164,7 +164,7 @@ for k,v in pairs(cfg.gaptitudes) do
 end
 
 -- MENU
-
+--[[
 local player_apts = {}
 
 local function ch_aptitude(player,choice)
@@ -210,13 +210,13 @@ local function ch_aptitude(player,choice)
   width: 100%;
   height: 20px;
 }
-      ]]
+      ]] --[[
 
       vRPclient.setDiv(player,{"user_aptitudes",css, content})
     end
   end
 end
-
+--[[
 -- add choices to the menu
 vRP.registerMenuBuilder("main", function(add, data)
   local user_id = vRP.getUserId(data.player)
@@ -227,5 +227,5 @@ vRP.registerMenuBuilder("main", function(add, data)
     add(choices)
   end
 end)
-
+--]]
 

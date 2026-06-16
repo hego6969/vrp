@@ -7,7 +7,7 @@ items["dirty_money"] = {"Sorte Penge","Ulovligt tjente penge.",nil,0}
 items["repairkit"] = {"Reparation Kit ","Bruges til at reparere køretøjer.",nil,0.5}
 
 -- money
-items["money"] = {"Kontanter","Sammenpakket penge.",function(args)
+--[[items["money"] = {"Kontanter","Sammenpakket penge.",function(args)
 	local choices = {}
 	local idname = args[1]
 
@@ -49,7 +49,7 @@ items["money_binder"] = {"Money binder","Used to bind 1000$ of money.",function(
 	end}
 
 	return choices
-end,0}
+end,0} -- ]]
 
 -- parametric weapon items
 -- give "wbody|WEAPON_PISTOL" and "wammo|WEAPON_PISTOL" to have pistol body and pistol bullets
@@ -105,7 +105,7 @@ local wammo_desc = function(args)
 	return ""
 end
 
-local wammo_choices = function(args)
+--[[local wammo_choices = function(args)
 	local choices = {}
 	local fullidname = joinStrings(args,"|")
 
@@ -117,10 +117,10 @@ local wammo_choices = function(args)
 				ramount = parseInt(ramount)
 
 				vRPclient.getWeapons(player, {}, function(uweapons)
-					if uweapons[args[2]] ~= nil then -- check if the weapon is equiped
+					if uweapons[args[2]]--[[ ~= nil then -- check if the weapon is equiped
 						if vRP.tryGetInventoryItem(user_id, fullidname, ramount, true) then -- give weapon ammo
 							local weapons = {}
-							weapons[args[2]] = {ammo = ramount}
+							weapons[args[2]] --[[= {ammo = ramount}
 							vRPclient.giveWeapons(player, {weapons,false})
 							vRP.closeMenu(player)
 						end
@@ -131,7 +131,7 @@ local wammo_choices = function(args)
 	end}
 
 	return choices
-end
+end --]]
 
 local wammo_weight = function(args)
 	return 0.01

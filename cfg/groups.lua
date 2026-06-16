@@ -61,9 +61,11 @@ cfg.groups = {
 		"admin.godmode",
 		"admin.revive",
 		"ledelse.fix",
+		"player.spectate",
 		"staff.revive",
 		"Mekaniker.dv",
-		"staff.chattitle"
+		"staff.chattitle",
+		"admin.bilforhandler",
   },
 
 	["Hitman"] = {
@@ -2077,7 +2079,6 @@ cfg.groups = {
 		"bilforhandler.paycheck",
 		"player.spawnvehicle",
 		"player.deletevehicle",
-		"admin.bilforhandler",
 	},
 	["Bar Arbejder"] = {
 		_config = {

@@ -5,7 +5,7 @@ local cfg = module("cfg/emotes")
 local lang = vRP.lang
 
 local emotes = cfg.emotes
-
+--[[
 local function ch_emote(player,choice)
   local emote = emotes[choice]
   if emote then
@@ -40,4 +40,4 @@ vRP.registerMenuBuilder("main", function(add, data)
     vRP.openMenu(player,menu)
   end}
   add(choices)
-end)
+end)--]]

@@ -10,6 +10,7 @@ shared_script{'cfg/webhooks.lua'}
 
 server_scripts{ 
   "@oxmysql/lib/MySQL.lua",
+  "@ox_lib/init.lua",
   "lib/utils.lua",
   "base.lua",
   "modules/gui.lua",
@@ -39,6 +40,7 @@ server_scripts{
   "modules/cloakroom.lua",
   --"modules/anticheat.lua",
   "modules/ox_inventory_compat.lua",
+  
    "modules/ox_prompt.lua",
 }
 

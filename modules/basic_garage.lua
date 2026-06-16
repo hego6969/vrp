@@ -512,7 +512,7 @@ local function ch_vehicle(player,choice)
     end
 end
 
--- ask trunk (open other user car chest)
+--[[ ask trunk (open other user car chest)
 local function ch_asktrunk(player,choice)
     vRPclient.getNearestPlayer(player,{10},function(nplayer)
         local user_id = vRP.getUserId(player)
@@ -553,7 +553,7 @@ local function ch_asktrunk(player,choice)
         end
     end)
 end
-
+--]]
 -- repair nearest vehicle
 local function ch_repair(player,choice)
   local user_id = vRP.getUserId(player)

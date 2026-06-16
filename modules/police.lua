@@ -768,7 +768,7 @@ local choice_cprsearch = {function(player, choice)
   end)
 end, lang.police.menu.cprsearch.description()}
 
-local choice_store_weapons = {function(player, choice)
+--[[local choice_store_weapons = {function(player, choice)
 	local user_id = vRP.getUserId(player)
 	local stored_items = {}
 	if user_id ~= nil then
@@ -797,7 +797,7 @@ local choice_store_weapons = {function(player, choice)
 			end)
 		end)
 	end
-end, lang.police.menu.store_weapons.description()}
+end, lang.police.menu.store_weapons.description()}--]]
 
 local revive_seq = {
   {"amb@medic@standing@kneel@enter","enter",1},
@@ -1033,9 +1033,9 @@ vRP.registerMenuBuilder("main", function(add, data)
       choices[lang.police.menu.askid.title()] = choice_askid
     end
 
-    if vRP.hasPermission(user_id, "police.store_weapons") then
+    --[[if vRP.hasPermission(user_id, "police.store_weapons") then
       choices[lang.police.menu.store_weapons.title()] = choice_store_weapons
-    end
+    end--]]
 
     if vRP.hasPermission(user_id, "user.askid") then
       choices[lang.police.menu.check.title()] = choice_user_check

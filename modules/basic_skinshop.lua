@@ -16,7 +16,7 @@ end
 
 -- open the skin shop for the specified ped parts
 -- name = partid
-function vRP.openSkinshop(source,parts)
+--[[function vRP.openSkinshop(source,parts)
   local user_id = vRP.getUserId(source)
   if user_id ~= nil then
     -- notify player if wearing a uniform
@@ -43,7 +43,7 @@ function vRP.openSkinshop(source,parts)
 
         -- apply change
         local custom = {}
-        custom[parts[choice]] = {drawables[choice][1],texture[1]}
+        custom[parts[choice]] --[[ = {drawables[choice][1],texture[1]}
         vRPclient.setCustomization(source,{custom})
       end
 
@@ -67,7 +67,7 @@ function vRP.openSkinshop(source,parts)
 
           -- apply change
           local custom = {}
-          custom[parts[choice]] = {drawable[1],textures[choice][1]}
+          custom[parts[choice]] --[[ = {drawable[1],textures[choice][1]}
           vRPclient.setCustomization(source,{custom})
 
           -- update max textures number
@@ -134,9 +134,9 @@ function vRP.openSkinshop(source,parts)
       vRP.openMenu(source,menudata)
     end)
   end
-end
+end  --]]
 
-local function build_client_skinshops(source)
+--[[local function build_client_skinshops(source)
 	local user_id = vRP.getUserId(source)
 	if user_id ~= nil then
 		for k,v in pairs(skinshops) do
@@ -171,3 +171,4 @@ AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
 		build_client_skinshops(source)
 	end
 end)
+--]]

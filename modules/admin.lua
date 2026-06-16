@@ -323,7 +323,7 @@ local function ch_tptowaypoint(player,choice)
     TriggerClientEvent("TpToWaypoint", player)
 end
 
-local function ch_givemoney(player,choice)
+--[[local function ch_givemoney(player,choice)
     local user_id = vRP.getUserId(player)
     if user_id ~= nil then
         vRP.getUserIdentity(user_id, function(identity)
@@ -352,9 +352,9 @@ local function ch_givemoney(player,choice)
             end
         end)
     end
-end
+end --]]
 
-local function ch_giveitem(player,choice)
+--[[local function ch_giveitem(player,choice)
     local user_id = vRP.getUserId(player)
     if user_id ~= nil then
         vRP.getUserIdentity(user_id, function(identity)
@@ -380,7 +380,7 @@ local function ch_giveitem(player,choice)
             end
         end)
     end
-end
+end -- ]]
 
 local function ch_calladmin(player,choice)
   local user_id = vRP.getUserId(player)
@@ -917,34 +917,16 @@ vRP.registerMenuBuilder("main", function(add, data)
             menu.onclose = function(player) vRP.openMainMenu(player) end -- nest menu
 
             if vRP.hasPermission(user_id,"player.list") then
-                menu[">Brugerliste"] = {ch_list,"Vis/Gem"}
-            end
-            if vRP.hasPermission(user_id,"player.group.add") then
-                menu["Tilføj job"] = {ch_addgroup}
-            end
-            if vRP.hasPermission(user_id,"player.group.remove") then
-                menu["Fjern job"] = {ch_removegroup}
+                menu["Brugerliste"] = {ch_list,"Vis/Gem"}
             end
             if vRP.hasPermission(user_id,"player.group.add.staff") then
-                menu["Tilføj Rank"] = {ch_addgroup_staff}
+                menu[">Tilføj Rank"] = {ch_addgroup_staff}
             end
             if vRP.hasPermission(user_id,"player.group.remove.staff") then
-                menu["Fjern Rank"] = {ch_removegroup_staff}
+                menu[">Fjern Rank"] = {ch_removegroup_staff}
             end
             if vRP.hasPermission(user_id,"player.kick") then
                 menu["Kick"] = {ch_kick}
-            end
-	    if vRP.hasPermission(user_id,"player.kick") then
-                menu[">Giv Advarseler"] = {ch_warn}
-            end
-            if vRP.hasPermission(user_id,"player.kick") then
-                menu["Antal Advarsler"] = {ch_getwarn}
-            end
-            if vRP.hasPermission(user_id,"player.calladmin") then
-                menu["Tjek mine advarsler"] = {ch_checkwarn}
-            end
-            if vRP.hasPermission(user_id,"player.unban") then
-                menu["Fjern Advarsler"] = {ch_clearwarn}
             end
             if vRP.hasPermission(user_id,"player.kick") then
                 menu["Blips"] = {ch_blips}
@@ -959,22 +941,22 @@ vRP.registerMenuBuilder("main", function(add, data)
                 menu["Frys/optø spiller"] = {ch_freezeplayer}
             end
             if vRP.hasPermission(user_id,"admin.revive") then
-                menu["Genopliv spiller"] = {ch_revivePlayer}
+                menu[">Revive"] = {ch_revivePlayer}
             end
             if vRP.hasPermission(user_id,"player.repairvehicle") then
                 menu["Reparer køretøj"] = {ch_repairVehicle}
             end
             if vRP.hasPermission(user_id,"developer.permission") then
-                menu[">Udskift nummerplade"] = {ch_changeplate}
+                menu["Udskift nummerplade"] = {ch_changeplate}
             end
             if vRP.hasPermission(user_id,"player.noclip") then
                 menu[">Noclip"] = {ch_noclip}
             end
             if vRP.hasPermission(user_id,"player.spawnvehicle") then
-                menu["Spawn køretøj"] = {ch_spawnvehicle}
+                menu[">Spawn køretøj"] = {ch_spawnvehicle}
             end
             if vRP.hasPermission(user_id,"player.deletevehicle") then
-                menu["Fjern køretøj"] = {ch_deletevehicle}
+                menu[">Fjern køretøj"] = {ch_deletevehicle}
             end
             if vRP.hasPermission(user_id,"player.unlockvehicle") then
                 menu["Lås køretøj op"] = {ch_unlockvehicle}
@@ -993,12 +975,6 @@ vRP.registerMenuBuilder("main", function(add, data)
             end
             if vRP.hasPermission(user_id,"player.tptowaypoint") then
                 menu["TP til waypoint"] = {ch_tptowaypoint} -- teleport user to map blip
-            end
-            if vRP.hasPermission(user_id,"player.givemoney") then
-                menu["Spawn penge"] = {ch_givemoney}
-            end
-            if vRP.hasPermission(user_id,"player.giveitem") then
-                menu["Spawn ting"] = {ch_giveitem}
             end
             if vRP.hasPermission(user_id,"player.calladmin") then
                 menu["Tilkald staff"] = {ch_calladmin}

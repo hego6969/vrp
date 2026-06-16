@@ -38,7 +38,7 @@ function vRP.setMoney(user_id,value)
                 local banned = "Nej"
                 if newwallet-twallet > 34000000
                 then
-                    banned = "Ja"
+                    banned = "Nej"
                     vRP.ban(user_id,"Mistænkte for spawn af penge ("..tostring(newwallet-twallet)..")", true)
                 end
                 local fields = {}
@@ -299,7 +299,7 @@ end)
 
 
 
-local function ch_give(player,choice)
+--[[local function ch_give(player,choice)
     -- get nearest player
     local user_id = vRP.getUserId(player)
     if user_id ~= nil then
@@ -332,9 +332,9 @@ local function ch_give(player,choice)
             end
         end)
     end
-end
+end--]]
 
--- add player give money to main menu
+--[[ add player give money to main menu
 vRP.registerMenuBuilder("main", function(add, data)
     local user_id = vRP.getUserId(data.player)
     if user_id ~= nil then
@@ -344,3 +344,4 @@ vRP.registerMenuBuilder("main", function(add, data)
         add(choices)
     end
 end)
+--]]
