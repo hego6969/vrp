@@ -1187,12 +1187,30 @@ end)
 
 
 
-lib.callback.register("vrp:targetPermissions", function(source)
-  local user_id = vRP.getUserId(source)
-  if not user_id then return {} end
+local targetPermissions = {
+  policeSearch = "police.menu",
+  policeHandcuff = "police.handcuff",
+  policePutInVeh = "police.putinveh",
+  policeGetOutVeh = "police.getoutveh",
+  policeCpr = "police.menu",
+  policeFine = "police.fine",
 
-  return {
-    police = vRP.hasPermission(user_id, "police.menu"),
+  emsRevive = "emergency.revive",
+  emsHeal = "emergency.heal",
+  emsDrag = "emergency.drag"
+}
+
+RegisterNetEvent("vrp:requestTargetPermissions")
+AddEventHandler("vrp:requestTargetPermissions", function()
+  local player = source
+  local user_id = vRP.getUserId(player)
+
+  if not user_id then
+    TriggerClientEvent("vrp:receiveTargetPermissions", player, {})
+    return
+  end
+
+  TriggerClientEvent("vrp:receiveTargetPermissions", player, {
     policeSearch = vRP.hasPermission(user_id, "police.check"),
     policeHandcuff = vRP.hasPermission(user_id, "police.pc"),
     policePutInVeh = vRP.hasPermission(user_id, "police.putinveh"),
@@ -1200,9 +1218,29 @@ lib.callback.register("vrp:targetPermissions", function(source)
     policeCpr = vRP.hasPermission(user_id, "police.cprsearch"),
     policeFine = vRP.hasPermission(user_id, "police.pc"),
 
-    ems = vRP.hasPermission(user_id, "emergency.menu"),
     emsRevive = vRP.hasPermission(user_id, "emergency.revive"),
     emsHeal = vRP.hasPermission(user_id, "emergency.heal"),
     emsDrag = vRP.hasPermission(user_id, "emergency.drag")
-  }
+  })
+end)
+AddEventHandler("vRP:playerJoinGroup", function(user_id, group, gtype)
+  local source = vRP.getUserSource(user_id)
+
+  if source then
+    TriggerClientEvent("vrp:refreshTargetPermissions", source)
+  end
+end)
+
+AddEventHandler("vRP:playerLeaveGroup", function(user_id, group, gtype)
+  local source = vRP.getUserSource(user_id)
+
+  if source then
+    TriggerClientEvent("vrp:refreshTargetPermissions", source)
+  end
+end)
+
+AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
+  SetTimeout(1500, function()
+    TriggerClientEvent("vrp:refreshTargetPermissions", source)
+  end)
 end)

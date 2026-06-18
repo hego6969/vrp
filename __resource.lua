@@ -1,6 +1,8 @@
 resource_manifest_version "44febabe-d386-4d18-afbe-5e627f4af937"
 
 dependency "oxmysql"
+dependency "ox_lib"
+dependency "ox_target"
 
 ui_page "gui/index.html"
 
@@ -10,7 +12,6 @@ shared_script{'cfg/webhooks.lua'}
 
 server_scripts{ 
   "@oxmysql/lib/MySQL.lua",
-  "@ox_lib/init.lua",
   "lib/utils.lua",
   "base.lua",
   "modules/gui.lua",
@@ -42,10 +43,10 @@ server_scripts{
   "modules/ox_inventory_compat.lua",
   
    "modules/ox_prompt.lua",
+   "modules/ox_target_server.lua",
 }
 
 client_scripts{
-  "@ox_lib/init.lua",
   "lib/utils.lua",
   "client/Tunnel.lua",
   "client/Proxy.lua",

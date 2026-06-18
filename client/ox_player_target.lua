@@ -1,8 +1,12 @@
 local targetPerms = {}
 
 local function refreshTargetPerms()
-  targetPerms = lib.callback.await("vrp:targetPermissions", false) or {}
+  TriggerServerEvent("vrp:requestTargetPermissions")
 end
+
+RegisterNetEvent("vrp:receiveTargetPermissions", function(perms)
+  targetPerms = perms or {}
+end)
 
 CreateThread(function()
   Wait(2000)
@@ -18,7 +22,7 @@ CreateThread(function()
     {
       name = "vrp_police_search",
       icon = "fa-solid fa-magnifying-glass",
-      label = "Visiter",
+      label = "Politi: Visiter",
       distance = 2.0,
       canInteract = function()
         return targetPerms.policeSearch == true
@@ -30,7 +34,7 @@ CreateThread(function()
     {
       name = "vrp_police_handcuff",
       icon = "fa-solid fa-handcuffs",
-      label = "Håndjern / fjern håndjern",
+      label = "Politi: Håndjern / fjern håndjern",
       distance = 2.0,
       canInteract = function()
         return targetPerms.policeHandcuff == true
@@ -42,7 +46,7 @@ CreateThread(function()
     {
       name = "vrp_police_putinveh",
       icon = "fa-solid fa-car",
-      label = "Sæt i bil",
+      label = "Politi: Sæt i bil",
       distance = 2.0,
       canInteract = function()
         return targetPerms.policePutInVeh == true
@@ -54,7 +58,7 @@ CreateThread(function()
     {
       name = "vrp_police_getoutveh",
       icon = "fa-solid fa-car-side",
-      label = "Tag ud af bil",
+      label = "Politi: Tag ud af bil",
       distance = 2.0,
       canInteract = function()
         return targetPerms.policeGetOutVeh == true
@@ -66,7 +70,7 @@ CreateThread(function()
     {
       name = "vrp_police_cpr",
       icon = "fa-solid fa-address-card",
-      label = "CPR opslag",
+      label = "Politi: CPR opslag",
       distance = 2.0,
       canInteract = function()
         return targetPerms.policeCpr == true
@@ -78,7 +82,7 @@ CreateThread(function()
     {
       name = "vrp_police_fine",
       icon = "fa-solid fa-money-bill",
-      label = "Bøde",
+      label = "Politi: Bøde",
       distance = 2.0,
       canInteract = function()
         return targetPerms.policeFine == true
@@ -90,7 +94,7 @@ CreateThread(function()
     {
       name = "vrp_ems_revive",
       icon = "fa-solid fa-heart-pulse",
-      label = "Genopliv",
+      label = "EMS: Genopliv",
       distance = 2.0,
       canInteract = function()
         return targetPerms.emsRevive == true
@@ -102,7 +106,7 @@ CreateThread(function()
     {
       name = "vrp_ems_heal",
       icon = "fa-solid fa-kit-medical",
-      label = "Heal",
+      label = "EMS: Heal",
       distance = 2.0,
       canInteract = function()
         return targetPerms.emsHeal == true
@@ -114,7 +118,7 @@ CreateThread(function()
     {
       name = "vrp_ems_drag",
       icon = "fa-solid fa-truck-medical",
-      label = "Træk person",
+      label = "EMS: Træk person",
       distance = 2.0,
       canInteract = function()
         return targetPerms.emsDrag == true
