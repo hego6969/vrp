@@ -148,7 +148,7 @@ end
 -- open the player main menu
 function vRP.openMainMenu(source)
   vRP.buildMenu("main", {player = source}, function(menudata)
-    menudata.name = "FlaxHosting"
+    menudata.name = "Madpakken"
     menudata.css = {top="75px",header_color="rgb(153, 136, 59)"}
     vRP.openMenu(source,menudata) -- open the generated menu
   end)

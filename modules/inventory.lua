@@ -67,7 +67,7 @@ function ch_give(idname, player, choice)
                 vRPclient.playAnim(nplayer,{true,{{"mp_common","givetake2_a",1}},false})
 
                 local dmessage = "ID:".. tostring(user_id).. " gav ID:".. tostring(nuser_id).. " ".. tostring(amount).. " ".. tostring(idname)
-                PerformHttpRequest(webhook.GiveItem, function(err, text, headers) end, 'POST', json.encode({username = 'FlaxHosting - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
+                PerformHttpRequest(webhook.GiveItem, function(err, text, headers) end, 'POST', json.encode({username = 'Madpakken - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
               else
                 vRPclient.notify(player,{lang.common.invalid_value()})
               end
@@ -96,7 +96,7 @@ function ch_trash(idname, player, choice)
 
         
         local dmessage = "ID:".. tostring(user_id).. " ødelagde ".. tostring(amount).. " ".. tostring(idname)
-        PerformHttpRequest(webhook.DestroyItem, function(err, text, headers) end, 'POST', json.encode({username = 'FlaxHosting - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
+        PerformHttpRequest(webhook.DestroyItem, function(err, text, headers) end, 'POST', json.encode({username = 'Madpakken - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
         
         vRPclient.notify(player,{lang.inventory.trash.done({vRP.getItemName(idname),amount})})
 		    TriggerClientEvent("DropSystem:drop", player, idname, amount)

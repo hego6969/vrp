@@ -3,7 +3,7 @@
 
 local lang = {
   common = {
-    welcome = "<center>Denne server er lavet i sammenarbejde med Flax Hosting</center>",
+    welcome = "<center>HUSK Madpakken ellers bliver det en træls dag.</center>",
     no_player_near = "Ingen spiller i nærheden.",
     invalid_value = "Forkert værdi.",
     invalid_name = "Forkert navn.",
@@ -63,8 +63,8 @@ local lang = {
     description = "Sælge bil til spiller",
   },
   money = {
-    display = "{1} <span class=\"symbol\">DKK </span>",
-    given = "Gav <b style='color: #DB4646'>{1} DKK</b>.",
+    display = "{1} DKK </span>",
+    given = "Gav {1} DKK.",
     received = "Modtog <b style='color: #4E9350'>{1} DKK</b>.",
     not_enough = "Ikke nok penge.",
     paid = "Betalte <b style='color: #DB4646'>{1} DKK</b>.",

@@ -381,7 +381,7 @@ function task_timeout() -- kick users not sending ping event in 3 minutes
 
     tmpdata.pings = tmpdata.pings+1
     if tmpdata.pings >= max_pings then
-      vRP.kick(v,"[FlaxHosting] Ping Timeout - Intet client svar i 3 minutter.")
+      vRP.kick(v,"[Madpakken] Ping Timeout - Intet client svar i 3 minutter.")
     end
   end
 
@@ -653,7 +653,7 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
     local ids = GetPlayerIdentifiers(source)
     if ids == nil or #ids == 0 then
       print("["..name.."] Afvist ingen identifiers fundet")
-      deferrals.done("[FlaxHosting]: Serveren kunne ikke finde nogen identifiers tjek om du har steam Ã¥bent")
+      deferrals.done("[Madpakken]: Serveren kunne ikke finde nogen identifiers tjek om du har steam Ã¥bent")
       sendToDiscord(webhook.Errorlog, "```Serveren kunne ikke finde identifiers```")
       Debug.pend()
       return
@@ -661,13 +661,13 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
 
     --if isMulticharacterStarted() and primary_identifier ~= nil and multicharacter_active_identifiers[primary_identifier] ~= nil and multicharacter_active_identifiers[primary_identifier] ~= source then
     -- print("["..name.."] Forsogte at joine med en identifier der allerede er online")
-    --  deferrals.done("[FlaxHosting] Du er allerede tilsluttet serveren.") -- for at teste på localhost
+    --  deferrals.done("[Madpakken] Du er allerede tilsluttet serveren.") -- for at teste på localhost
     --  Debug.pend()
     --  return
     --end
 
     if isMulticharacterStarted() then
-      deferrals.update("[FlaxHosting] IndlÃ¦ser karaktervalg.")
+      deferrals.update("[Madpakken] IndlÃ¦ser karaktervalg.")
       acceptConnection()
       Debug.pend()
       return
@@ -676,14 +676,14 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
     if antispam[ids[1]] == nil then
       --antispam[ids[1]] = 5
       if ids ~= nil and #ids > 0 then
-        deferrals.update("[FlaxHosting] Indlæser karakter.")
+        deferrals.update("[Madpakken] Indlæser karakter.")
         vRP.getUserIdByIdentifiers(ids, function(user_id)
           -- if user_id ~= nil and vRP.rusers[user_id] == nil then -- check user validity and if not already connected (old way, disabled until playerDropped is sure to be called)
           if user_id ~= nil then -- check user validity
-            deferrals.update("[FlaxHosting] Indlæser karakter..")
+            deferrals.update("[Madpakken] Indlæser karakter..")
             vRP.getUserData(user_id, function(userdata)
               if not userdata.banned then
-                deferrals.update("[FlaxHosting] Indlæser karakter...")
+                deferrals.update("[Madpakken] Indlæser karakter...")
                 if not config.whitelist or userdata.whitelisted then
                   Debug.pbegin("playerConnecting_delayed")
                   if vRP.rusers[user_id] == nil then -- not present on the server, init
@@ -694,7 +694,7 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                     vRP.user_tmp_tables[user_id] = {}
                     vRP.user_sources[user_id] = source
 
-                    deferrals.update("[FlaxHosting] Indlæser karakter.")
+                    deferrals.update("[Madpakken] Indlæser karakter.")
                     vRP.getUData(user_id, "vRP:datatable", function(sdata)
                       local data = json.decode(sdata)
                       if type(data) == "table" then vRP.user_tables[user_id] = data end
@@ -702,7 +702,7 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                       
                       local tmpdata = vRP.getUserTmpTable(user_id)
 
-                      deferrals.update("[FlaxHosting] Indlæser karakter..")
+                      deferrals.update("[Madpakken] Indlæser karakter..")
                       vRP.getLastLogin(user_id, function(last_login)
                         tmpdata.last_login = last_login or ""
                         tmpdata.spawns = 0
@@ -731,7 +731,7 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                   Debug.pend()
                 else
                   print("["..user_id.."]: Forsøgte og joine men er ikke whitelistet")
-                  deferrals.done("[FlaxHosting] Ikke whitelisted ansøg på Discord.gg/P7bj3ZXu ["..user_id.."].")
+                  deferrals.done("[Madpakken] Ikke whitelisted ansøg på Discord.gg/P7bj3ZXu ["..user_id.."].")
                 end
               else
                 local ban_reason = userdata.ban_reason
@@ -739,18 +739,18 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                     ban_reason = "Ingen grund sat"
                 end
                 print("["..user_id.."] Forsøgte og joine men er bandlyst med grunden ("..ban_reason..")")
-                deferrals.done("[FlaxHosting]: Du er bannet for: "..ban_reason.." ["..user_id.."].")
+                deferrals.done("[Madpakken]: Du er bannet for: "..ban_reason.." ["..user_id.."].")
               end
             end)
           else
             print("["..name.."] Afvist kunne ikke finde user_id")
-            deferrals.done("[FlaxHosting]: Serveren kunne ikke finde dit ID kontakt venligst en fra developer teamet")
+            deferrals.done("[Madpakken]: Serveren kunne ikke finde dit ID kontakt venligst en fra developer teamet")
             sendToDiscord(webhook.Errorlog, "```Serveren kunne ikke finde user_id```")
           end
         end)
       else
         print("["..name.."] Afvist ingen identifiers fundet")
-        deferrals.done("[FlaxHosting]: Serveren kunne ikke finde nogen identifiers tjek om du har steam åbent")
+        deferrals.done("[Madpakken]: Serveren kunne ikke finde nogen identifiers tjek om du har steam åbent")
         sendToDiscord(webhook.Errorlog, "```Serveren kunne ikke finde identifiers```")
       end
     else
@@ -863,6 +863,6 @@ RegisterServerEvent("vRP:playerDied")
 function sendToDiscord(webhook, message)
   PerformHttpRequest(webhook, 
   function(err, text, headers) end, 'POST', 
-  json.encode({username = 'FlaxHosting - Logs', content = message}), 
+  json.encode({username = 'Madpakken - Logs', content = message}), 
   { ['Content-Type'] = 'application/json' })
 end

@@ -95,7 +95,7 @@ local function ch_whitelist(player,choice)
       id = parseInt(id)
       vRP.setWhitelisted(id,true)
       local dmessage = "```[ID: ".. tostring(user_id).. "] Tilføjede whitelist til [ID: " .. tostring(id).. "]```"
-      PerformHttpRequest(webhook.Whitelist, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
+      PerformHttpRequest(webhook.Whitelist, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
 
       TriggerClientEvent("pNotify:SendNotification", player,{text = "ID " ..id.. " blev whitelisted", type = "success", queue = "global", timeout = 3000, layout = "bottomCenter",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
     end)
@@ -109,7 +109,7 @@ local function ch_unwhitelist(player,choice)
       id = parseInt(id)
       vRP.setWhitelisted(id,false)
       local dmessage = "```[ID: ".. tostring(user_id).. "] Fjernede whitelist Fra [ID: " .. tostring(id).. " ]```"
-      PerformHttpRequest(webhook.Unwhitelist, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
+      PerformHttpRequest(webhook.Unwhitelist, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
 
       TriggerClientEvent("pNotify:SendNotification", player,{text = "ID " ..id.. " blev unwhitelisted", type = "success", queue = "global", timeout = 3000, layout = "bottomCenter",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
     end)
@@ -130,7 +130,7 @@ local function ch_addgroup_staff(player,choice)
                         vRP.addUserGroup(id,group)
 
                         local dmessage = "```".. tostring(user_id).. " tilføjede gruppe [".. tostring(group).. "] til " .. tostring(id).. "```"
-                        PerformHttpRequest(webhook.AddGroup, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
+                        PerformHttpRequest(webhook.AddGroup, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
                         TriggerClientEvent("pNotify:SendNotification", player,{text = id.." blev ansat som "..group, type = "success", queue = "global", timeout = 4000, layout = "centerRight",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
                     end
                 end)
@@ -182,7 +182,7 @@ local function ch_kick(player,choice)
 
                     
                     local dmessage = "```".. tostring(user_id).. " kickede ".. tostring(id).. " - Begrundelse: " .. tostring(reason).. "```"
-                    PerformHttpRequest(webhook.Kick, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
+                    PerformHttpRequest(webhook.Kick, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
 
                     TriggerClientEvent("pNotify:SendNotification", player,{text = "Du kickede "..id, type = "success", queue = "global", timeout = 4000, layout = "centerRight",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
                 end
@@ -219,7 +219,7 @@ local function ch_unban(player,choice)
       vRP.setBanned(id,false)
       vRPclient.notify(player,{"un-banned user "..id})
 			local dmessage = "```ID ".. tostring(user_id).. " unbannede ID ".. tostring(id) .."```"
-			PerformHttpRequest(webhook.Unban, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
+			PerformHttpRequest(webhook.Unban, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
     end)
   end
 end
@@ -237,7 +237,7 @@ local function ch_revivePlayer(player,choice)
             vRP.setThirst(tonumber(user_id), 0)
             
             local dmessage = "```".. tostring(nuser_id).. " genoplivet ".. tostring(user_id).. " ("..os.date("%H:%M:%S %d/%m/%Y")..")```"
-            PerformHttpRequest(webhook.Revive, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
+            PerformHttpRequest(webhook.Revive, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
 
         end
     end)
@@ -252,7 +252,7 @@ local function ch_repairVehicle(player,name,choice)
 	local user_id = vRP.getUserId(player)
 
 	local dmessage = "**Reparer køretøj** \n```\nAdmin ID: ".. tostring(user_id).. "\n```"
-	PerformHttpRequest(webhook.Repair, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
+	PerformHttpRequest(webhook.Repair, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = dmessage}), { ['Content-Type'] = 'application/json' })
 end
 
 local function ch_coords(player,choice)
@@ -275,7 +275,7 @@ local function ch_tptome(player,choice)
           
     
           local dmessage = "**TP Person til mig** \n```\nAdmin ID: ".. tostring(user_id2).. "\n```"
-          PerformHttpRequest(webhook.TpToMe, function(err, text, headers) end, 'POST', json.encode({username = 'FlaxHosting - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
+          PerformHttpRequest(webhook.TpToMe, function(err, text, headers) end, 'POST', json.encode({username = 'Madpakken - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
         end
       end)
     end)
@@ -292,7 +292,7 @@ local function ch_tptome(player,choice)
           local player = vRP.getUserSource({user_id})
 
           local dmessage = "**TP til person** \n```\nAdmin ID: ".. tostring(user_id2).. "\n```"
-          PerformHttpRequest(webhook.TpTo, function(err, text, headers) end, 'POST', json.encode({username = 'FlaxHosting - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
+          PerformHttpRequest(webhook.TpTo, function(err, text, headers) end, 'POST', json.encode({username = 'Madpakken - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
         end)
       end
     end)
@@ -344,7 +344,7 @@ end
                                 vRP.giveMoney(user_id, amount)
                                 TriggerClientEvent("pNotify:SendNotification", player,{text = "Du spawnede " ..amount.. "DKK", type = "success", queue = "global", timeout = 4000, layout = "centerRight",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
 
-                                PerformHttpRequest(webhook.SpawnMoney, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = "**ID: "..user_id.." ("..identity.firstname.." "..identity.name..")** spawnede **"..amount.." DKK** - Kommentar: *"..reason.."*"}), { ['Content-Type'] = 'application/json' })
+                                PerformHttpRequest(webhook.SpawnMoney, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = "**ID: "..user_id.." ("..identity.firstname.." "..identity.name..")** spawnede **"..amount.." DKK** - Kommentar: *"..reason.."*"}), { ['Content-Type'] = 'application/json' })
                             end
                         end
                     end)
@@ -372,7 +372,7 @@ end --]]
                                 amount = parseInt(amount)
                                 vRP.giveInventoryItem(user_id, idname, amount,true)
 
-                                PerformHttpRequest(webhook.SpawnItem, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = "```ID: "..user_id.." spawnede "..amount.." stk. "..idname.."```"}), { ['Content-Type'] = 'application/json' })
+                                PerformHttpRequest(webhook.SpawnItem, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = "```ID: "..user_id.." spawnede "..amount.." stk. "..idname.."```"}), { ['Content-Type'] = 'application/json' })
                             end
                         end)
                     end
@@ -405,7 +405,7 @@ local function ch_calladmin(player,choice)
         if ok then -- take the call
           if not answered then
              local steamname = GetPlayerName(v)
-            PerformHttpRequest(webhook.AdminCall, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = "```\n".. steamname.."\nTog et admin call fra ID "..user_id..".\nIndhold: "..desc..".```"}), { ['Content-Type'] = 'application/json' })  -- answer the call
+            PerformHttpRequest(webhook.AdminCall, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = "```\n".. steamname.."\nTog et admin call fra ID "..user_id..".\nIndhold: "..desc..".```"}), { ['Content-Type'] = 'application/json' })  -- answer the call
             vRPclient.notify(player,{"En staff har taget din case!"})
             vRPclient.getPosition(player, {}, function(x,y,z)
             vRPclient.teleport(v,{x,y,z})
@@ -458,7 +458,7 @@ local function choice_bilforhandler(player, choice)
                                                                 end)
                                                                 local message = "**"..user_id.."** solgte en **"..spawn.."** til **"..nuser_id.."** for **"..format_thousands(tonumber(price)).." DKK**"
                                                                 if lowprice then message = message.." @everyone" end
-                                                                PerformHttpRequest(webhook.SellCar, function(err, text, headers) end, 'POST', json.encode({username = "FlaxHosting - Logs", content = message}), { ['Content-Type'] = 'application/json' })
+                                                                PerformHttpRequest(webhook.SellCar, function(err, text, headers) end, 'POST', json.encode({username = "Madpakken - Logs", content = message}), { ['Content-Type'] = 'application/json' })
 
                                                                 TriggerClientEvent("pNotify:SendNotification", target,{text = {"Tillykke med din <b style='color: #4E9350'>"..spawn.."</b>!"}, type = "warning", queue = "global", timeout = 4000, layout = "centerRight",animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
                                                             else
@@ -525,7 +525,7 @@ local function ch_noclip(player, choice)
 		
     
 		local dmessage = "**Noclip** \n```\nAdmin ID: ".. tostring(user_id).. "\n```"
-		PerformHttpRequest(webhook.Noclip, function(err, text, headers) end, 'POST', json.encode({username = 'FlaxHosting - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
+		PerformHttpRequest(webhook.Noclip, function(err, text, headers) end, 'POST', json.encode({username = 'Madpakken - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
 	 
 end
 
@@ -851,7 +851,7 @@ local function ch_spawnvehicle(player, choice)
            TriggerClientEvent("hp:spawnvehicle",player,veh)
            
            local dmessage = "**Spawn køretøj** \n```\nAdmin ID: ".. tostring(user_id).. "\nKøretøj: ".. tostring(veh).. "\n```"
-           PerformHttpRequest(webhook.SpawnVehicle, function(err, text, headers) end, 'POST', json.encode({username = 'FlaxHosting - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
+           PerformHttpRequest(webhook.SpawnVehicle, function(err, text, headers) end, 'POST', json.encode({username = 'Madpakken - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
        end
    end)
 end
@@ -913,7 +913,7 @@ vRP.registerMenuBuilder("main", function(add, data)
         -- build admin menu
         choices["> Admin"] = {function(player,choice)
 
-            local menu = {name="FlaxHosting",css={top="75px",header_color="rgb(153, 136, 59)"}}
+            local menu = {name="Madpakken",css={top="75px",header_color="rgb(153, 136, 59)"}}
             menu.onclose = function(player) vRP.openMainMenu(player) end -- nest menu
 
             if vRP.hasPermission(user_id,"player.list") then

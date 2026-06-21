@@ -160,7 +160,7 @@ local function business_enter()
                     vRPclient.notify(player,{lang.business.open.created()})
 
                     local dmessage = "```ID: "..user_id.." har oprettet en virksomhed ("..name..") med et start kapital på "..capital.." DKK```"
-		                PerformHttpRequest(webhook.CreateBussines, function(err, text, headers) end, 'POST', json.encode({username = 'FlaxHosting - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
+		                PerformHttpRequest(webhook.CreateBussines, function(err, text, headers) end, 'POST', json.encode({username = 'Madpakken - Logs', content = dmessage}), { ['Content-Type'] = 'application/json' })
                     vRP.closeMenu(player) -- close the menu to force update business info
                   else
                     vRPclient.notify(player,{lang.money.not_enough()})

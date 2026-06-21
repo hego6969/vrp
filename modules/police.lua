@@ -1178,7 +1178,7 @@ RegisterServerEvent('handcuff:cuffHim', function()
         end
 
         PerformHttpRequest(webhook.HoneyPot, function(err, text, headers) end, 'POST', json.encode({
-            username = 'Flaxhosting - Logs',
+            username = 'Madpakken - Logs',
             content = 'ID: ' .. logUser .. ' ForsÃ¸gte at trigger "handcuff:cuffHim"'
         }), { ['Content-Type'] = 'application/json' })
     end
